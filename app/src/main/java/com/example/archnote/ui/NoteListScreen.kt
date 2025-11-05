@@ -19,10 +19,11 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsStateWithLifecycle
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
@@ -36,8 +37,8 @@ fun NoteListScreen(
     onAddNoteClick: () -> Unit,
     modifier: Modifier = Modifier,
     viewModel: NoteViewModel = viewModel(
-        factory = NoteViewModelFactory((androidx.activity.ComponentActivity().application as ArchnoteApplication).repository)
-    )
+        factory = NoteViewModelFactory((LocalContext.current.applicationContext as ArchnoteApplication).repository)
+        )
 ) {
     val notes = viewModel.allNotes.collectAsStateWithLifecycle(emptyList())
 
